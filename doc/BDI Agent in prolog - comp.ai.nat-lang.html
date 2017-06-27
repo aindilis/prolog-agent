@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>BDI Agent in prolog - comp.ai.nat-lang</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Hi,
+ 
+ My problem is to write basic functions of BDI Agent in prolog. The
+ problem
+ description(case) is about Tileworld and only one agent is invlove... 2437848">
+            
+    <link rel="Stylesheet" href="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/bootstrap.css">
+    <link href="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/main.css" rel="stylesheet">
+    <link href="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/colorbox.css" rel="stylesheet">
+    
+    <link rel="canonical" href="http://compgroups.net/comp.ai.nat-lang/bdi-agent-in-prolog/2437848">
+
+<script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/ados.js" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/js" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_003.php" async="" type="text/javascript"></script><link href="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/buttons.css" type="text/css" rel="stylesheet"><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_006.php" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_002.php" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_004.php" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_005.php" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_008.php" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in.php" async="" type="text/javascript"></script><script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/in_007.php" async="" type="text/javascript"></script></head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://compgroups.net/"><span><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/comp.png"> compgroups</span></a>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        
+                        <ul class="nav navbar-nav">
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+
+                            <li><a href="http://compgroups.net/groups/"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/group16.png"> groups</a></li>
+                            <li><a href="http://compgroups.net/top-users/"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/users16.png"> users</a></li>
+                            <li><a href="http://compgroups.net/article%7Estream"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/clock16.png"> stream</a></li>
+                            <li><a href="http://compgroups.net/site%7Esearch"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/icon_search.gif"> search</a></li>
+                            <li><a href="http://compgroups.net/article%7Ebrowse/1"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/earth16.png"> browse</a></li>
+                            <li><a href="http://compgroups.net/article%7Epost"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/add16.png"> post</a></li>
+                            <li><a href="http://compgroups.net/site%7Eabout"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/info16.png"> about</a></li>
+                            <li id="user"><a href="http://compgroups.net/site%7Esignin"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/key.png"> register</a></li>
+
+                        </ul>
+                    </div>
+                </nav>
+        </div>
+
+        
+ 
+
+
+<br>
+<br>
+<br>
+<br>
+ 
+<div class="rtl-container-fixed-center body-content">
+
+    <div class="row">
+        <div class="col-md-0 col-lg-2"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="panel panel-default panel-heading">
+                <h4>BDI Agent in prolog</h4>
+            </div>
+        </div>
+        <div id="socials" class="col-md-4 col-lg-2 well well-sm">
+            <span st_processed="yes" class="st_googleplus_large" displaytext="Google +"><span class="stButton" style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;"><span style="background-image: url(&quot;http://w.sharethis.com/images/googleplus_32.png&quot;);" class="stLarge"></span></span></span>
+            <span st_processed="yes" class="st_facebook_large" displaytext="Facebook"><span class="stButton" style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;"><span style="background-image: url(&quot;http://w.sharethis.com/images/facebook_32.png&quot;);" class="stLarge"></span></span></span>
+            <span st_processed="yes" class="st_twitter_large" displaytext="Tweet"><span class="stButton" style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;"><span style="background-image: url(&quot;http://w.sharethis.com/images/twitter_32.png&quot;);" class="stLarge"></span></span></span>
+            <span st_processed="yes" class="st_linkedin_large" displaytext="LinkedIn"><span class="stButton" style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;"><span style="background-image: url(&quot;http://w.sharethis.com/images/linkedin_32.png&quot;);" class="stLarge"></span></span></span>
+            <span st_processed="yes" class="st_reddit_large" displaytext="Reddit"><span class="stButton" style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;"><span style="background-image: url(&quot;http://w.sharethis.com/images/reddit_32.png&quot;);" class="stLarge"></span></span></span>
+            <span st_processed="yes" class="st_email_large" displaytext="Email"><span class="stButton" style="text-decoration:none;color:#000000;display:inline-block;cursor:pointer;"><span style="background-image: url(&quot;http://w.sharethis.com/images/email_32.png&quot;);" class="stLarge"></span></span></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-0 col-lg-2"></div>
+        <div class="col-md-8 col-lg-6">
+
+                <div class="panel panel-default">
+
+        <div class="panel-body">
+            <pre class="ForumPostContentText">Hi,
+
+My problem is to write basic functions of BDI Agent in prolog. The
+problem
+description(case) is about Tileworld and only one agent is invloved.
+Please
+give me some ideas for the problem.
+
+The Tileworld consists of a two-dimensional grid of locations,
+extending to
+infinity in both directions. Some locations contain "food" resources
+(of
+varying values), which agents must "eat" in order to score points. An
+agent
+eats a piece of food by moving to its location and executing an eat
+action.
+Agents can move one square at a time either horizontally or
+vertically. The
+world is dynamic in that food may spontaneously appear at a randomly
+determined location at any time.
+
+The agent's beliefs at any time simply consist of a list containing
+one term
+of the form at(X,Y) representing the current location of the agent.
+The
+agent's beliefs are always correct.
+
+The agent's goals at any time are a list of locations of food items
+and
+their values. Each goal of the agent is represented as an term
+goal(X,Y,S),
+where (X,Y) is the location of the food and S is its value.
+
+The agent's intentions are these goals ordered according to some
+priority.
+To fulfil an intention, the agent's action is just to move along some
+path
+towards the corresponding goal and collect the reward (the actual path
+is
+determined at run time).
+
+There are three types of action the agent can execute in any one
+cycle:
+null - the agent does nothing
+eat(X,Y) - the agent eats the food at (X,Y) and gains the associated
+reward
+move(X,Y) - the agent moves to the location (X,Y)
+
+The agent's prioritization strategy is very simple: each new goal is
+inserted into the list of intentions in order of the closeness of the
+food
+item to the agent's current position (closer items coming earlier in
+the
+list). However, once a goal is incorporated into the list of
+intentions, it
+is never re-prioritized with respect to existing goals as the agent
+moves
+about (hence after some time the list may not accurately reflect the
+closeness of food to the agent).
+
+The agent chooses to go towards the food item nearest to the agent
+when it
+appeared. The
+initial state of the world is always that there is no food and the
+agent is
+at the location (0,0).
+
+HERE ARE THE QUESTIONS. PLEASE GIVE ME SOME IDEAS OR ALGORITHMS. I AM
+LOST!!
+
+1. How to write a Prolog procedure incorporate intentions(Options,
+Beliefs,
+Intentions, Intentions1) which has four arguments: a list of options
+each of
+the form goal(X,Y,S), a list of beliefs (here containing one term of
+the
+form at(X,Y)), the current list of intentions each of the form
+goal(X,Y,S),
+and computes a list which contains the new options inserted into the
+current
+list of intentions in order of the Manhattan distance of the goal from
+the
+agent's current location. If an option is the same distance from the
+agent
+as an existing goal, the new goal should be placed later in the list.
+
+2. How to write a Prolog procedure select action(Beliefs, Intentions,
+Action) which takes the agent's beliefs (a singleton list containing
+an term for the agent's location) and the list of intentions, and
+computes an action to be taken by the agent. Note that the goal
+selected by the agent is the first on the list of intentions, and in
+the case of a move action, the action should specify the coordinates
+to which the agent should move (being one square from the agent's
+current location). Due to the use of Manhattan distance and the fact
+that there are no obstacles in the world, the exact path the agent
+takes towards the goal does not matter much, so choose the simplest
+way of implementing this procedure.
+
+3. How to write two Prolog procedures update beliefs(Observation,
+Beliefs,
+Beliefs1) and update intentions(Observation, Intentions, Intentions1)
+to
+compute the lists of beliefs and intentions resulting from the agent's
+observations. (one line for each possible observation type)!
+
+4. How to write a Prolog procedure trigger(Events, Options) which
+takes a
+list of events, each of the form food(X,Y,S) and computes a list of
+options
+for the agent, each of the form goal(X,Y,S).
+
+_______________
+
+The following Prolog program implements the experimental setup,
+including the generation of events (appearance of food) and the
+execution of actions, and the agent's BDI interpretation cycle and
+observation functions. It consists of one agent in the Tileworld that
+repeatedly executes the BDI interpretation cycle for 20 iterations.
+The produced code must work with this program.
+
+% Simulates a single agent in the Tileworld where food appears on each
+cycle
+% at randomly % determined locations in the 10x10 grid with
+probability 0.3
+
+% run a trial of 20 cycles of the BDI interpreter starting with the
+agent at (0,0)
+
+agent_trial :-
+	init,
+	agent_trials(0, 20, [at(0,0)], [], 0, Score),
+	write('Total score: '), print(Score), !.
+
+
+% initial state of the world
+
+init :-
+	assert(robot_at(0,0)).
+
+
+% run trials up to N
+
+agent_trials(N, N, _, _, Score, Score) :- !.
+
+agent_trials(N1, N, Beliefs, Intentions, Score, Score2) :-
+	N1 &lt; N,
+	agent_cycle(N1, Beliefs, Beliefs1, Intentions, Intentions1, S),
+	Score1 is Score + S,
+	N2 is N1 + 1,
+	agent_trials(N2, N, Beliefs1, Intentions1, Score1, Score2).
+
+
+% the BDI interpretation cycle used by the agent
+
+agent_cycle(N, Beliefs, Beliefs1, Intentions, Intentions2, S) :-
+	write('Cycle '), write(N), print(':'),
+	new_events(N, Events),
+	trigger(Events, Options),
+	incorporate_intentions(Options, Beliefs, Intentions, Intentions1),
+	write('    Intentions: '), print(Intentions1),
+	select_action(Beliefs, Intentions1, Action),
+	write('    Action: '), write(Action),
+	execute(Action, S),
+	write(' scores '), print(S),
+	observe(Action, Observation),
+	write('    Observation: '), print(Observation),
+	update_beliefs(Observation, Beliefs, Beliefs1),
+	write('    New Beliefs: '), print(Beliefs1),
+	update_intentions(Belief, Intentions1, Intentions2),
+	write('    New Intentions: '), print(Intentions2).
+
+
+%  with probability 0.3, a new food item appears in random location on
+the 10x10 grid
+
+new_events(N, [food(X,Y,S)]) :-
+	Prob is random(1),
+	Prob =&lt; 0.3, !,
+	X is round(random(10)),
+	Y is round(random(10)),
+	S is round(random(10)),
+	write('    Events: food value '), write(S), write(' appears at '),
+write('('), write(X), write(','), write(Y), print(')'),
+	assert(food(X, Y, S)).
+
+new_events(N, []) :-
+	print('    Events: none').
+
+
+% execute action in the Tileworld -- always successfully!
+
+execute(null, 0).
+
+execute(eat(X,Y), S) :-
+	retract(food(X, Y, S)),
+	assert(eaten(X,Y)).
+
+execute(move(X1,Y1), 0) :-
+	retract(robot_at(U, V)),
+	distance((U,V), (X1,Y1), 1),
+	assert(robot_at(X1, Y1)).
+
+
+% observe result of action -- always correctly!
+
+observe(null, at(X,Y)) :-
+	robot_at(X, Y).
+
+observe(move(_,_), at(X,Y)) :-
+	robot_at(X, Y).
+
+observe(eat(_,_), eaten(X,Y)) :-
+	retract(eaten(X,Y)).
+
+Thanks.
+
+Regards,
+Joe
+</pre>
+        </div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4">
+                    <table style="text-align: center;  width:90px" class="Voting" votesum="0">
+    <tbody><tr>
+        <td>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/plus32.png" style="cursor: pointer" title="Vote Up!" onclick="OnVoteArticle($(this).closest('table'),'<b490f776.0404221809.679fd38e@posting.google.com>', true);" height="20px">
+        </td>
+        <td style="color: Green; font-weight: bold; font-size: 15px" title="0 Total Votes">
+           0
+        </td>
+        <td>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/minus32.png" style="cursor: pointer" title="Vote Down!" onclick="OnVoteArticle($(this).closest('table'),'<b490f776.0404221809.679fd38e@posting.google.com>', false);" height="20px">
+        </td>
+    </tr>
+</tbody></table>
+
+                </div>
+                <div class="col-md-4">
+
+
+
+<span><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/user.png"><b>neilyork82</b></span>                </div>
+                <div class="col-md-4">
+                    <span title="4/23/2004 2:09:18 AM" class="date pull-right">4/23/2004</span>
+
+                </div>
+                </div>
+        </div>
+    </div>
+
+
+
+
+        </div>
+        <div class="col-md-4 col-lg-2 well well-sm">
+       <div class="item">
+    <a href="http://compgroups.net/comp.ai.nat-lang/"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/group.png"><b>comp.ai.nat-lang</b></a>
+    <a href="http://compgroups.net/comp.ai.nat-lang/info"><img title="comp.ai.nat-lang group information" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/i.png"></a>
+    <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/article.gif">1739 articles.  <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/star2.gif">0 followers.
+        <span><span class="user"><a href="http://compgroups.net/user/arin280"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/733c9b273ba50ca3e859d68de3f23ab3.png"><b>arin280</b></a> <b title="Points" style="color:green">(56)</b>   </span> is leader.</span>
+            <a class="btn btn-success btn-xs" href="http://compgroups.net/article%7Epost?g=comp.ai.nat-lang">Post</a>
+        <a class="btn btn-info btn-xs" onclick="OpenModal('/fr~subscribegroup?group=comp.ai.nat-lang', 400, 300)">Follow</a>
+    </div> <br>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/reply.png">
+            <b>2 Replies </b>
+            <br>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/eye.png">
+            <b>26 Views</b>
+            <br><br>
+            <b><a href="#similar"><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/a.png">Similar Articles</a></b><br><br>
+            
+                <span id="PageSpeed">0.003 - </span> 
+55                <div id="ad4" class="visible-md visible-lg"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-0 col-lg-2"></div>
+        <div class="col-md-8 col-lg-6">
+            <b>
+                <a href="#similar" class="a2">
+                    <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/a.png">See related articles to this posting</a>
+            </b>
+            <br><br>
+        </div>
+      
+        </div>
+            <div class="row">
+                <div class="col-md-0 col-lg-2"></div>
+                <div id="ad1" class="col-md-8 col-lg-6"></div>
+               
+            </div>
+        <br>
+                <div class="row">
+
+                    <div class="col-md-0 col-lg-2"></div>
+                    <div class="col-md-8 col-lg-6">
+
+                        
+
+<div class="panel panel-default">
+
+    <div class="panel-body">
+        <pre class="ForumPostContentText">"Joe" wrote in message
+news:b490f776.0404221809.679fd38e@posting.google.com...
+Bla, bla, bla...
+
+What on earth has this to with natural language?
+
+-- 
+Mail sent to this email address is automatically deleted
+(unread) on the server. Send replies to the newsgroup.
+
+
+</pre>
+    </div>
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-4">
+                <table style="text-align: center;  width:90px" class="Voting" votesum="0">
+    <tbody><tr>
+        <td>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/plus32.png" style="cursor: pointer" title="Vote Up!" onclick="OnVoteArticleReply($(this).closest('table'),'<7Jbic.9860$EV2.96205@amstwist00>', true);" height="20px">
+        </td>
+        <td style="color: Green; font-weight: bold; font-size: 15px" title="0 Total Votes">
+           0
+        </td>
+        <td>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/minus32.png" style="cursor: pointer" title="Vote Down!" onclick="OnVoteArticleReply($(this).closest('table'),'<7Jbic.9860$EV2.96205@amstwist00>', false);" height="20px">
+        </td>
+    </tr>
+</tbody></table>
+
+            </div>
+            <div class="col-md-4">
+
+<span><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/user.png"><b>Nameless</b></span>            </div>
+            <div class="col-md-4">
+                <span title="4/23/2004 4:43:39 PM" class="date pull-right">4/23/2004</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-0 col-lg-2"></div>
+                    <div class="col-md-8 col-lg-6">
+
+                        
+
+<div class="panel panel-default">
+
+    <div class="panel-body">
+        <pre class="ForumPostContentText">"Joe" &lt;neilyork82@yahoo.com&gt; wrote in message
+news:b490f776.0404221809.679fd38e@posting.google.com...
+&gt; Hi,
+&gt;
+&gt; My problem is to write basic functions of BDI Agent in prolog.
+
+Joe,
+
+Suggest you take this up with your TA. Doing your homework via the net does
+not lead to personal growth.
+
+
+</pre>
+    </div>
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-4">
+                <table style="text-align: center;  width:90px" class="Voting" votesum="0">
+    <tbody><tr>
+        <td>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/plus32.png" style="cursor: pointer" title="Vote Up!" onclick="OnVoteArticleReply($(this).closest('table'),'<9Ubic.24$d4.2@bos-service2.ext.ray.com>', true);" height="20px">
+        </td>
+        <td style="color: Green; font-weight: bold; font-size: 15px" title="0 Total Votes">
+           0
+        </td>
+        <td>
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/minus32.png" style="cursor: pointer" title="Vote Down!" onclick="OnVoteArticleReply($(this).closest('table'),'<9Ubic.24$d4.2@bos-service2.ext.ray.com>', false);" height="20px">
+        </td>
+    </tr>
+</tbody></table>
+
+            </div>
+            <div class="col-md-4">
+
+<span><img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/user.png"><b>Gorbag</b></span>            </div>
+            <div class="col-md-4">
+                <span title="4/23/2004 4:55:31 PM" class="date pull-right">4/23/2004</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    </div>
+                </div>
+
+
+    <div class="row">
+        <div class="col-md-0 col-lg-2"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="well">
+    <form id="replyForm">
+        <table width="100%" cellpadding="10">
+            <tbody><tr>
+                <td>
+                    <b>Reply:</b><br>
+                    <textarea id="Body" name="Body" rows="7" style="width: 100%" placeholder="Enter Your Response"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input onclick="PostReply()" value="Post Reply" class="btn btn-success" type="button">
+                    <input name="insertSignature" class="btn btn-info" value="Insert Signature" onclick="InsertSignature( $('#Body'),'') " type="button">
+                </td>
+            </tr>
+        </tbody></table>
+        <input id="MessageId" name="MessageId" value="&lt;b490f776.0404221809.679fd38e@posting.google.com&gt;" type="hidden">
+        <input id="GroupName" name="GroupName" value="comp.ai.nat-lang" type="hidden">
+        <input id="Subject" name="Subject" value="Re: BDI Agent in prolog" type="hidden">
+    </form>
+</div>
+<script>
+    function PostReply() {
+        IsLoading("<img src='/img/spin.gif' /> Submitting...");
+
+        PostArticle($('#replyForm').serialize())
+        .done(function (res) { 
+            $.isLoading('hide');
+
+            if (res.msg) IsLoading(res.msg, 2000);
+            if (res.result == "manual") {
+                $('#replyForm')[0].reset();
+                parent.OpenModal('/fr~share?subject=BDI Agent in prolog&url=http://compgroups.net/comp.ai.nat-lang/bdi-agent-in-prolog/2437848', 350, 150);
+            }
+            else if (res.result == 'invalid') return;
+            else if (res.result == 'ok') {
+                parent.OpenModal('/fr~share?subject=BDI Agent in prolog&url=http://compgroups.net/comp.ai.nat-lang/bdi-agent-in-prolog/2437848', 350, 150,
+                    function () { parent.location = res.url + '?refresh=1'; });
+            }
+            else OpenModal('/fr~signin', 450, 350);
+        })
+        .fail(function (x) { $.isLoading('hide'); alert(x.responseText); })
+       
+    }
+</script>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-0 col-lg-2"></div>
+            <div class="col-md-8 col-lg-6">
+                <div id="ad2"></div>
+            </div>
+        </div>
+    <br>
+    <div id="similar"></div>
+    <div id="divSimilarInternal"><div class="row">
+        <div class="col-md-0 col-lg-2"></div>
+        <div class="col-md-8 col-lg-6">
+            <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/a.png"> <b class="a2">Similar Artilces: </b><br><br>
+            <div style="overflow: auto" class="well">
+               <a href="http://compgroups.net/comp.databases.ms-access/ai-ai-ai/1459539"><b>ai ai ai</b></a><br>
+
+Hello ,
+ 
+ 
+
+ 
+
+ 
+I work for a small transporting company, our clients send us  pick-up
+adressess by fax and by e-mail.
+ 
+We give every pick up order a number, chronologically in the way we
+receive the orders.
+ 
+Than,we  make a table in which we type every pick-up order.
+ 
+ 
+Afterwards, we give every driver a number of pick-ups.
+ 
+We also give the drivers a list with all the adressess.
+ 
+ 
+To make  these lists, we make a query (which results in a report) for
+every driver.
+ 
+ 
+In the query we type in all the numbers (the pick up numbers)
+ 
+Everything works very well, BUT
+ 
+for example: we get...<br><br><a href="http://compgroups.net/comp.ai.nat-lang/where-else-do-people-talk-about-ai-and-nat-l/2441667"><b>where else do people talk about ai and nat-lang?</b></a><br>I notice that comp.ai has been down for months
+and wonder if the community has migrated over
+to some web-site message board or something?
+
+If people aren't using comp.ai (and aren't using
+comp.ai.nat-lang that much either) - where are
+they?
+
+
+
+ "Craig Harris" &lt;harris@SummerEyes.com&gt; wrote in message
+news:76ydnZ2dnZ1Y-zf1nZ2dnQonkt6dnZ2dRVn-y52dnZ0@megapath.net...
+&gt;I notice that comp.ai has been down for months
+&gt; and wonder if the community has migrated over
+&gt; to some web-site message board or something?
+&gt;
+&gt; If people aren't using comp....<br><br><a href="http://compgroups.net/comp.lang.prolog/why-not-prolog-in-prolog/58681"><b>Why Not Prolog in Prolog ?</b></a><br>Prolog can do anything that C or C++ can do.
+But for the 2 outstanding prolog systems , SWI- and GNU prolog ,
+the source codes are not written in prolog .
+Why not ?
+If only it was in prolog  ! 
+Really if only !!
+
+ On 28 Apr 2006 18:27:44 -0700, newser.bbs@bbs.ee.ncu.edu.tw wrote:
+
+&gt;Prolog can do anything that C or C++ can do.
+&gt;But for the 2 outstanding prolog systems , SWI- and GNU prolog ,
+&gt;the source codes are not written in prolog .
+&gt;Why not ?
+
+Do this yourself.
+
+A.L.
+ On 28 Apr 2006 18:27:44 -0700
+newser.bbs@bbs.ee.ncu.edu.tw wrote:
+
+&gt; Prolog can do anything that C or C++ ca...<br><br><a href="http://compgroups.net/comp.security.firewalls/nat-to-nat/1866221"><b>NAT to NAT</b></a><br>Hi I am running VNC on a machine on my network behind my NAT router. I
+have forwarded the ports and everything and have checked that they
+work by using the tools at: http://www.psi-rho.com/dsltools/ (i used
+the webserver one because VNC's reply shows in it.
+
+The ports are open and reply back and everything and i have even
+managed to get friends to connect to me but when i go to college i
+cant connect. I am assuming that my college uses NAT too. Could this
+be causing problems?
+
+I first assumed that they had blocked the port so i even tried using
+the webserver in VNC to connect. I realised t...<br><br><a href="http://compgroups.net/comp.ai.edu/agent-without-ai/2213883"><b>agent without ai</b></a><br>hiya all
+
+java source code
+ public warningbox wb;
+ public button    connectbutton;
+ 
+public menuitem  consoleitem;
+ public menu      filemenu;
+ public button    
+connectbutton;
+ public stringdialog	  maindialog;
+ 
+could you show me how to debug agent design and its association with ai security?
+
+find some ideas at http://sourceforge.net/projects/tinyreverseprox/ when we talk about agent
+...<br><br><a href="http://compgroups.net/comp.ai.nat-lang/agent-and-the-concept-of-ai/2450440"><b>agent and the concept of ai</b></a><br>hiya
+
+java source code
+ // the menu bar and sub-menus
+ public menuitem  
+artvectoritem;
+ public int numarticles;
+...<br><br><a href="http://compgroups.net/comp.ai.philosophy/ai-in-software-agents/336504"><b>AI in software agents</b></a><br>hi
+
+i would like to know how are artificial intelligence and statistical
+tenchniques used in software agents??
+thanks
+ mike wrote:
+
+&gt; i would like to know how are artificial intelligence and statistical
+&gt; tenchniques used in software agents??
+
+Here are some key words for a google search:
+
+"Bayesian Analysis"
+"Markov chains"
+"Latent Semantic Indexing"
+
+I'm sure there are others from a different perspectives. 
+Perhpas if you asked a more specific question, you would get 
+a more specific answer.
+
+Patty
+
+ LSI would be great for parallelization, we discussed ...<br><br><a href="http://compgroups.net/comp.ai.nat-lang/translate-nat-lang/2438803"><b>translate nat-lang ?????</b></a><br>hello to every  body (gia kai xara se olous [greeklish])
+
+allow my friends,
+does anybody know how i can translate for example 
+"english language to pseudo code(algorithm code)"
+or "pseudo code to sourse code(c/c++,clips,java etc.)"
+or "any sourse language to an other destining language"
+
+
+I have listen last 2 weeks about translation commercial packet 
+TRADOS 6.5. But it was multiterminology lexicon and it was dificult 
+to trainning this software.
+my friends if anybody of you, know any algorithm 
+(ann,expert,generic,mametic etc) please infom me 
+
+THA...<br><br><a href="http://compgroups.net/comp.lang.prolog/prolog-ai-for-game-of-go/54693"><b>Prolog AI for Game of Go</b></a><br>Hi everybody,
+
+I am unable to find some useful information on how to create a simple
+AI in Prolog for the Game of Go. Can you give me any pointers?
+
+Thank you,
+Vasile
+
+ Vasile V. Alaiba &lt;vasile.alaiba@gmail.com&gt; wrote:
+&gt; Hi everybody,
+&gt; I am unable to find some useful information on how to create a simple
+&gt; AI in Prolog for the Game of Go. Can you give me any pointers?
+[...]
+
+
+
+A sentence containing all of simple, Prolog, AI and "Go" is an oxymoron. :)
+
+
+If you absolutely have to be there (overnight?) better start tracing
+down the reference chain from www.cs.berkeley.e...<br><br><a href="http://compgroups.net/comp.ai/ai-agents-for-learning-from-the-web/177064"><b>AI agents for learning from the web?</b></a><br>Has anyone written a good AI agent that basically learns by searching
+the web? I would think of such a tool could be run in parrell by many
+servers then in a short time alot of information can be "learned"
+quickly.  I could easily write a web spider to parse through text on
+websites and move on to the next linked page. Then I could store the
+data in a database for doing intelligent searches and identifing trend.
+I am thinking some kind of neural network could be devised to process
+the data.
+
+[ comp.ai is moderated.  To submit, just post and be patient, or if ]
+[ that fails mail your ...<br><br><a href="http://compgroups.net/comp.ai.philosophy/agents-the-other-not-very-serious-way-to-a/164576"><b>Agents, the other (not very serious) way to AI</b></a><br>aka chinese bureaucracy
+
+Take a group of people (thousands?), and assign each one the role of a 
+concept or situation, acting the role of a hofstadter style 'active 
+symbol'. Have them break up a task amongst themselves, but without doing 
+anything too individually intelligent.
+
+If you have enough of an idea to break up the task (but not enough 
+initially to implement the subtasks on a computer), the crowd as a whole 
+acts as a (slow and probably idiotic with possible occasional flurries 
+of genius) mind.
+
+At this point you should have a truly creative bureaucracy, which would 
+be a fi...<br><br><a href="http://compgroups.net/comp.protocols.snmp/agent++-agent-development/2441206"><b>Agent++ Agent development</b></a><br>I download the SNMP++ and Agent++ API's from the net. I am trying to
+build an agent using the APIs
+I have taken a MIB table and trying to register this oid in the agent.
+
+If anyone provide me about how to start with, it would be helpful..
+
+Thanks,
+Karthik N
+
+ Hi Karthik,
+
+To get help on AGENT++/SNMP++ etc. please subscribe to
+the AGENT++ mailing list at:
+http://lists.agentpp.org/mailman/listinfo/agentpp
+
+Basically, registering an instrumented SMI table is
+subclassing MibTable and then calling
+
+mib.add(new MyMibTable(...));
+
+where "mib" is an instance of the Mi...<br><br><a href="http://compgroups.net/comp.ai.alife/ai-and-the-particular-case-of-agent/2615202"><b>ai and the particular case of agent</b></a><br>hiya all
+
+this sample code is similar
+ public menu      filemenu;
+ public button    
+listbutton;
+ public list      articlelisttext;
+ // the connection to the 
+network-related functions and associated data
+ public makelistbox mlb;
+ public
+ menuitem  postitem;
+ public stringdialog	  maindialog;
+ public menu      
+filemenu;
+ public button    vectorbutton;
+ public button    listbutton;
+ 
+public makelistbox mlb;
+ // the connection to the network-related functions 
+and associated data
+...<br><br><a href="http://compgroups.net/comp.soft-sys.matlab/bdi-agents-with-matlab-simulink/1209111"><b>BDI Agents with Matlab/Simulink</b></a><br>Hello everyone,
+
+i'm going to develot a Multi-Agent Simulation system using 
+Matlab/Simulink. For the overall simulation i think Simulink is a very 
+powerful tool to use.
+However i'm not sure how to implement the actual agents using BDI 
+(Belief-Desire-Intention) Model?
+Are there any examples for BDI Agents developed with Matlab/Simulink? Is 
+there any chance to insert agents from other frameworks (e.g. JADE)?
+
+Best Regards
+Sebastian
+ 
+JADEX
+...<br><br>
+            </div>
+            <div id="ad3"></div>
+        </div>
+    </div></div>
+    <div id="divSimilarExternal"><div class="row">
+            <div class="col-md-0 col-lg-2"></div>
+            <div class="col-md-8 col-lg-6">
+                <img src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/a.png"> <b class="a2">Web resources about - BDI Agent in prolog - comp.ai.nat-lang</b><br><br>
+                <div style="overflow: auto" class="well">
+                   <div class="row"><a rel="nofollow" href="http://en.wikipedia.org/wiki/Prolog" target="_blank">  <b>Prolog - Wikipedia, the free encyclopedia</b></a><br>This
+ article is about the programming language. For the narrative device, 
+see Prologue . For other uses, see Prologue (disambiguation) . Prolog 
+...</div><br><div class="row"><a rel="nofollow" href="https://itunes.apple.com/us/app/prolog-mobile/id562079763?mt=8" target="_blank"> <img class="pull-left" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/icon_340.png" width="100"> <b>Prolog Mobile on the App Store on iTunes</b></a><br>Get Prolog Mobile on the App Store. See screenshots and ratings, and read customer reviews.</div><br><div class="row"><a rel="nofollow" href="http://dmoz.org/Computers/Programming/Languages" target="_blank">  <b>Open Directory - Computers: Programming: Languages</b></a><br>about
+ dmoz - dmoz blog - report abuse/spam - help the entire directory only 
+in Programming/Languages Description Top : Computers : Programming ...</div><br><div class="row"><a rel="nofollow" href="http://en.m.wikipedia.org/wiki/English_language_spelling_reform" target="_blank"> <img class="pull-left" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/150px-1879_SpellingReform_Bulletin_Boston.png" width="100"> <b>English-language spelling reform - Wikipedia, the free encyclopedia</b></a><br>For
+ hundreds of years, many groups and individuals have advocated spelling 
+reform for English . Spelling reformers seek to make English spelling 
+...</div><br><div class="row"><a rel="nofollow" href="http://www.cse.unsw.edu.au/%7Ebillw/glossary.html" target="_blank">  <b>Dictionary or Glossary?</b></a><br>The
+ AI Dictionary , ML Dictionary , NLP Dictionary ,and Prolog Dictionary 
+are could more precisely be described as glossaries rather than 
+dictionaries. ...</div><br><div class="row"><a rel="nofollow" href="http://www.ccl.kuleuven.ac.be/LKR/html/node1.html" target="_blank">  <b>Introduction</b></a><br>Introduction</div><br><div class="row"><a rel="nofollow" href="http://www.cs.ubc.ca/spider/poole/research.html" target="_blank"> <img class="pull-left" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/ResearchPic.png" width="100"> <b>David Poole - Research</b></a><br>Combining
+ logic and probability/decision making or what is called relational 
+probabilistic reasoning or statistical relational AI, particularly ...</div><br><div class="row"><a rel="nofollow" href="http://www.allbookstores.com/Computers-Books" target="_blank">  <b>Computers Books</b></a><br>Computers Books. Discount prices on, Artificial Intelligence, Bioinformatics, Buyer's Guides, CAD-CAM books, textbooks.</div><br><div class="row"><a rel="nofollow" href="http://aplwiki.com/FindPage" target="_blank">  <b>FindPage - APL wiki</b></a><br>Search:
+ APL Wiki Login FindPage RecentChanges FindPage HelpContents Immutable 
+Page Comments Info Attachments More Actions: Raw Text Print View ...</div><br><div class="row"><a rel="nofollow" href="http://www.atarimagazines.com/index/?issue=startv3n8" target="_blank">  <b>Index of STart Vol. 3 No. 8 articles</b></a><br>STart
+ Vol. 3 No. 8 - March 1989 - Pen &amp; Pixel Yes, But Is It Art? The ST 
+as an Artistic Tool by Heather Leitch SEURAT Super-Powered Paint Program
+ ...</div><br><div class="text-center" style="font-size:small">Resources last updated: 2/9/2016 12:12:23 AM</div>
+                </div>
+            </div>
+        </div></div>
+</div>
+
+
+
+
+        <footer>
+            <div class="rlt-footer-default">
+    <div class="rtl-container-fixed-center text-center">
+        <a class="a2" href="javascript:OpenModal('/ifr/contact',%20475,%20300)">feedback</a> | <a class="a2" href="http://compgroups.net/site%7Eprivacy">privacy policy</a> | <span class="a2">All Times Are GMT(UTC)</span> 
+    </div>
+</div>
+        </footer>
+
+    <script type="text/javascript" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/jquery.js"></script>
+    <script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/bootstrapjs"></script>
+
+    <script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/menujs"></script>
+
+    <script type="text/javascript" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/main.js"></script>
+    
+    <script src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/article"></script>
+
+    <link rel="Stylesheet" href="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/isloading.css">
+<script type="text/javascript" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/jquery_002.js"></script>
+
+    <script type="text/javascript">var switchTo5x = true;</script>
+    <script type="text/javascript" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/buttons.js"></script>
+    <script type="text/javascript">stLight.options({ publisher: "8539d792-b932-4ef1-91d2-9d14e7aded8d", doNotHash: false, doNotCopy: false, hashAddressBar: false });</script>
+
+
+          
+
+<script type="text/javascript">
+	var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(191998);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+</script>
+
+    
+     <script>
+              setupAds();
+            </script>
+                <script type="text/javascript">var p="http",d="static";if(document.location.protocol=="https:"){p+="s";d="engine";}var z=document.createElement("script");z.type="text/javascript";z.async=true;z.src=p+"://"+d+".adzerk.net/ados.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+
+                <script type="text/javascript">
+          var ados = ados || {};
+          ados.run = ados.run || [];
+          ados.run.push(function() { 
+   
+          ados_add_placement(2072, 17356, "azk25862", 5);
+          ados_add_placement(2072, 17356, "azk26003", 5);
+          ados_add_placement(2072, 17356, "azk50008", 5);
+          ados_add_placement(2072, 17356, "azk15916", 5);
+ 	ados_add_placement(2072, 17356, "azk27218", 5);
+          ados_add_placement(2072, 17356, "azk34159", 5);
+          ados_add_placement(2072, 17356, "azk24097", 5);
+          ados_load();
+          });
+        </script>
+      <script>$('#PageSpeed').html('0.003 - ')</script>
+
+
+<div style="display: none;" id="cboxOverlay"></div><div style="display: none;" class="" id="colorbox"><div id="cboxWrapper"><div><div style="float: left;" id="cboxTopLeft"></div><div style="float: left;" id="cboxTopCenter"></div><div style="float: left;" id="cboxTopRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxMiddleLeft"></div><div style="float: left;" id="cboxContent"><div style="width: 0px; height: 0px; overflow: hidden; float: left;" id="cboxLoadedContent"></div><div style="float: left;" id="cboxLoadingOverlay"></div><div style="float: left;" id="cboxLoadingGraphic"></div><div style="float: left;" id="cboxTitle"></div><div style="float: left;" id="cboxCurrent"></div><div style="float: left;" id="cboxNext"></div><div style="float: left;" id="cboxPrevious"></div><div style="float: left;" id="cboxSlideshow"></div><div style="float: left;" id="cboxClose"></div></div><div style="float: left;" id="cboxMiddleRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxBottomLeft"></div><div style="float: left;" id="cboxBottomCenter"></div><div style="float: left;" id="cboxBottomRight"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div style="position: absolute; top: -1999px; left: -1988px;" id="stcpDiv">ShareThis Copy and Paste</div><iframe style="display:none;" scrolling="no" src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/getSegment.html" name="stSegmentFrame" id="stSegmentFrame" frameborder="0" height="0px" width="0px"></iframe><div style="display: none;" class="stwrapper stwrapper5x" id="stwrapper"><iframe src="BDI%20Agent%20in%20prolog%20-%20comp.ai.nat-lang_files/index.html" scrolling="no" name="stLframe" class="stLframe" id="stLframe" allowtransparency="true" frameborder="0"></iframe></div><div onclick="javascript:stWidget.closeWidget();" id="stOverlay"></div></body></html>

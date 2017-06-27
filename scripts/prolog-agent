@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /var/lib/myfrdcsa/codebases/minor/prolog-agent/attempts/3
+./prolog-agent-start -u &
+echo "Waiting for 10 secondings for prolog-agent to start, then will load repl"
+sleep 10
+./prolog-agent-start-repl

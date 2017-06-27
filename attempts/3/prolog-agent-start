@@ -1,0 +1,42 @@
+#!/usr/bin/perl -w
+
+# see Formalog::Util::Prolog;
+# see Formalog::Multi;
+# see Formalog::Multi::Agent;
+# see Formalog::Multi::Agent::Yaswi;
+
+use Formalog::Multi::Test;
+
+use UniLang::Agent::Agent;
+use UniLang::Util::Message;
+
+$UNIVERSAL::agent = UniLang::Agent::Agent->new
+  (Name => "Prolog-Agent",
+   ReceiveHandler => \&Receive);
+$UNIVERSAL::agent->DoNotDaemonize(1);
+
+$UNIVERSAL::test = Formalog::Multi::Test->new();
+
+sub Receive {
+  my %args = @_;
+  $UNIVERSAL::test->ProcessMessage
+    (Message => $args{Message});
+}
+
+$UNIVERSAL::test->Execute
+  (
+   AddNewAgentArgs => {
+		       AgentName => 'Prolog-Agent-Agent1',
+		       YaswiName => 'Prolog-Agent-Yaswi1',
+		       YaswiData => {
+				     Context => 'Org::FRDCSA::PrologAgent::Attempt3',
+				     # FileNameToLoad => '/var/lib/myfrdcsa/codebases/minor/free-fluxplayer/swipl/calendaring',
+				     FileNameToLoad => '/var/lib/myfrdcsa/codebases/minor/prolog-agent/attempts/3/3a.pl',
+				     # /var/lib/myfrdcsa/codebases/minor/free-life-planner/free_life_planner.pl
+				     # Before => '',
+				     # During => '',
+				     # After => '',
+				    },
+		      },
+  );
+

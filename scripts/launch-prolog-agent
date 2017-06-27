@@ -1,0 +1,4 @@
+#!/usr/bin/perl -w
+
+# We need to start up a uxterm if not already, then a screen for it,
+# i.e. screen -S prolog-agent (or whatever, i.e. flp).

@@ -1,0 +1,5 @@
+(defun kmax-find-function-or-macro-elisp (&optional function-arg)
+ (interactive)
+ (let ((function (or function-arg (kmax-function-macro-or-special-form-at-point))))
+  (find-function function)
+  (recenter-top-bottom)))

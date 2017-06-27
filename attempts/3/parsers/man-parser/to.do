@@ -1,0 +1,1 @@
+(parse SYNOPSIS, OPTIONS, COMMANDS, etc)

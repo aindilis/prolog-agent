@@ -1,0 +1,1 @@
+/var/lib/myfrdcsa/codebases/minor/agent/performatives/BDI Agent in prolog - comp.ai.nat-lang.txt

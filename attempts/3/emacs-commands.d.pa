@@ -1,0 +1,41 @@
+durativeAction(
+	       emacsComand('forward-char'),
+	       [
+	       ],
+	       0.1,
+	       [
+		'at start'('='('current-column'(),'$VAR'('Column'))),
+		'at start'('='('current-line'(),'$VAR'('Line')))
+	       ],
+	       [
+		when('at start'(and('='(length(kmax-get-line())),'$VAR'('Column')),'='(kmax-number-of-lines(),'$VAR'('Line'))),
+		     happens(error('End of buffer'))),
+		when('at start'('='(length(kmax-get-line())),'$VAR'('Column')),
+		     and('='('current-line'(),'+'('$VAR'('Line'),1)),'='('current-column'(),0))),
+		when('at start'('>'(length(kmax-get-line())),'$VAR'('Column')),
+		     '='('current-column'(),'+'('$VAR'('Column'),1)))
+	       ]
+	      ).
+
+durativeAction(
+	       emacsComand('forward-char'),
+	       [
+		are(['$VAR'('N')],integer),
+	       ],
+	       0.1,
+	       [
+		'at start'('='('current-column'(),'$VAR'('Column'))),
+		'at start'('='('current-line'(),'$VAR'('Line')))
+	       ],
+	       [
+		%% fix these to include subtraction and like if 5
+		%% chars are left in the line and it says go forward
+		%% 9, to wrap and go forward 4, etc, or even more if newlines then
+		when('at start'(and('='(length(kmax-get-line())),'$VAR'('Column')),'='(kmax-number-of-lines(),'$VAR'('Line'))),
+		     happens(error('End of buffer'))),
+		when('at start'('='(length(kmax-get-line())),'$VAR'('Column')),
+		     and('='('current-line'(),'+'('$VAR'('Line'),1)),'='('current-column'(),0))),
+		when('at start'('>'(length(kmax-get-line())),'$VAR'('Column')),
+		     '='('current-column'(),'+'('$VAR'('Column'),1)))
+	       ]
+	      ).

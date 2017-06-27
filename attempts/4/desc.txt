@@ -1,0 +1,167 @@
+                     COMP9414/9814 Artificial Intelligence
+
+                                Session 1, 2013
+
+                    Project 3, Option 1: Prolog (BDI Agent)
+
+                         Due: Sunday 2 June, 11:59 pm
+                        Marks: 12% of final assessment
+
+                                 Introduction
+
+  In this assignment, you will implement the basic functions of a simple BDI
+  Agent that operates in a Gridworld, and by doing so, learn about the ideas
+                            underlying BDI agents.
+
+                                   Gridworld
+
+  The Gridworld consists of a two-dimensional grid of locations, extending to
+infinity in both directions. Some locations contain "junk" which the agent must
+  "clean up" in order to score points. An agent cleans up a piece of junk by
+   moving to its location and executing a pickup action. Agents can move one
+  square at a time either horizontally or vertically. The world is dynamic in
+  that junk may spontaneously appear at randomly determined locations at any
+ time, though there is never more than one item of junk in the same location.
+
+                                  [gridworld]
+
+         Figure 1: Gridworld State: Agent (circle) with junk (squares)
+
+A supplied Prolog program implements a system for conducting an experimental
+trial consisting of one agent in the Gridworld that repeatedly executes the BDI
+interpretation cycle for 20 iterations (this is a deliberately small number for
+ease of writing and debugging the program). The initial state of the world is
+always that there is no junk and the agent is at the location (0,0).
+
+The agent's beliefs at any time simply consist of a list containing one term of
+the form at(X,Y) representing the current location of the agent. The agent's
+beliefs are always correct (i.e. if the agent "thinks" it is at location (3,4)
+then it is at location (3,4)). Hence the initial belief state of the agent is
+represented by the list [at(0,0)].
+
+The agent's goals at any time are a list of locations of junk and their values.
+Each goal of the agent is represented as a term goal(X,Y,S), where (X,Y) is the
+location of a piece of junk and S is its value. The agent's intentions are a
+list of pairs, each of the form [Goal, Plan], representing a goal with an
+associated plan (that may be the empty plan), ordered according to some
+priority.
+
+Each plan is a list of actions. To fulfil an intention, the agent executes the
+plan associated with the goal, which will make the agent move along a path
+towards the goal and clean it up. If, when the agent chooses a goal to pursue,
+the plan associated with the goal is empty or cannot be executed, the agent
+creates a new plan for the goal and then begins to execute this plan.
+
+In each cycle the agent executes one action; there are two types of action the
+agent can execute:
+
+   pickup(X,Y) - the agent picks up the junk at (X,Y) and scores the associated
+points
+   move(X,Y)   -   the agent moves to the location (X,Y)
+
+BDI Interpreter
+
+In each time cycle, the agent executes the interpreter shown abstractly in
+Figure 2. The new external events on each cycle are represented as a list of
+terms of the form junk(X,Y,S), indicating the perception of junk at location
+(X,Y) with value S within some viewing distance of the agent. The agent will
+repeatedly perceive the same junk item for as long as it is in viewing range.
+It is not assumed that the agent can see all of the grid, so a new external
+event may occur as the agent moves (unknowingly) towards a piece of junk. Each
+new perceived event junk(X,Y,S) triggers a goal for the agent, represented as a
+term of the form goal(X,Y,S). Any new goal is incorporated into the agent's
+list of intentions according to the agent's prioritization strategy (see
+below). The agent then selects one action for execution from the current list
+of intentions (here the agent always selects the first intention on the list if
+there is one, creates or modifies the associated plan if necessary, then
+selects the first action in that plan, removes the selected action from the
+chosen plan, executes the action, and updates the list of intentions by
+removing any successfully achieved goals. If there are no current intentions,
+the agent simply moves to any adjacent location.
+
+                      Abstract BDI Interpreter:
+                        initialize-state();
+                        do
+                          get-new-external-event(events);
+                          G := trigger(events);
+                          incorporate-goals(G, I);
+                          action := select-action(B, I);
+                          execute(action);
+                          observe(action, facts);
+                          update-beliefs(facts, B);
+                          update-intentions(facts, I);
+                        until quit
+
+The agent's prioritization strategy is very simple: without reordering existing
+goals, each new goal is inserted into the list of intentions in order of value
+(higher values before lower values), but if the new goal has the same value as
+existing goal(s), the new goal is inserted into the list of goals of the same
+value in order of distance from the current position (closer before further
+away). This means the agent maintains a "commitment" to pursuing its goals (the
+agent only changes its intention to pick up a higher value item or a closer
+item with the same value).
+
+Assignment [12 marks]
+
+You are supplied with a Prolog program in a file gridworld.pro that implements
+the experimental setup, including the generation of events (appearance of junk)
+and the execution of actions, and the agent's BDI interpretation cycle and
+observation functions.
+
+[1 mark] Write a Prolog procedure trigger(Events, Goals) which takes a list of
+events, each of the form junk(X,Y,S), and computes the corresponding list of
+goals for the agent, each of the form goal(X,Y,S). This is a very simple
+procedure!
+
+[4 marks] Write a Prolog procedure
+incorporate_goals(Goals, Beliefs, Intentions, Intentions1)
+which has four arguments: a list of goals each of the form goal(X,Y,S), a list
+of beliefs (containing one term of the form at(X,Y)), the current list of
+intentions each of the form [goal(X,Y,S), Plan], and a list to be computed
+which contains the new goals inserted into the current list of intentions in
+decreasing order of value, using the distance from the agent to break ties.
+More precisely, a new goal should be placed immediately before the first goal
+in the list that has a lower value or which has an equal value and is further
+away from the agent's current position, without reordering the current list of
+goals. Note that because of repeated perception of the same event, only new
+goals should be inserted into the list of intentions. The plan associated with
+each new goal should be the empty plan (represented as the empty list).
+
+[3 marks] Write a Prolog procedure
+select_action(Beliefs, Intentions, Intentions1, Action)
+which takes the agent's beliefs (a singleton list containing a term for the
+agent's location) and the list of intentions, and computes an action to be
+taken by the agent and the updated list of intentions. The intention selected
+by the agent is the first on the list of intentions (if any). If the first
+action in this plan is applicable, the agent selects this action and updates
+the plan to remove the selected action. If there is no associated plan (i.e.
+the plan is the empty list) or the first action in the plan for the first
+intention is not applicable in the current state, the agent constructs a new
+plan to go from its current position to the goal state and pick up the junk
+there (this plan will be a list of move actions followed by an pick up action),
+selects the first action in this new plan, and updates the list of intentions
+to incorporate the new plan (minus the selected first action). Due to the fact
+that there are no obstacles in the world, the exact path the agent takes
+towards the goal does not matter, so choose any convenient way of implementing
+this procedure. The procedure applicable is defined in gridworld.pro
+
+[1 mark] Write two Prolog procedures
+update_beliefs(Observation, Beliefs, Beliefs1) and
+update_intentions(Observation, Intentions, Intentions1)
+to compute the lists of beliefs and intentions resulting from the agent's
+observations. These are very simple procedures (one line for each possible
+observation type)!
+
+There are 3 marks allocated for comments and programming style.
+
+Submission
+
+Submit one file called agent.pro using the command
+
+give cs9414 hw3prolog agent.pro
+
+Your solution should work with the supplied file gridworld.pro. Do not change
+any of the procedures in this file and do not include the code from this file
+with your submission.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
